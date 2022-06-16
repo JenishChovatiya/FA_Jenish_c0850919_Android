@@ -1,8 +1,10 @@
 package com.example.fa_jenish_c0850919_android;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -40,4 +42,25 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
+
+    void addPlaces(String title)
+    {
+        SQLiteDatabase sdatabase = this.getWritableDatabase();
+        ContentValues cv =new ContentValues();
+
+
+        cv.put(COLUMN_TITLE, title);
+
+        long result = sdatabase.insert(TABLE_NAME, null, cv);
+        if(result == -1)
+        {
+            Toast.makeText(context, "Failed to insert.", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Added Data into database Successfully.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

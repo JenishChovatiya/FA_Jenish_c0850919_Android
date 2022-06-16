@@ -13,6 +13,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,6 +39,11 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap gMap;
 
 
+    EditText placeNameET;
+    Button addBtn;
+
+
+
     private Marker userLocationMarker;
     private Marker destinationMarker;
 
@@ -55,18 +63,26 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_insertpage);
 
 
+        placeNameET = findViewById(R.id.placeNameEditText);
+        addBtn = findViewById(R.id.addButnInsertPage);
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
-        /*fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getCurrentLocation();
-        }*/
+        //setting up on click listener
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                DatabaseHelper myDatabaseHelper = new DatabaseHelper(insertpage.this);
+                myDatabaseHelper.addPlaces(placeNameET.getText().toString().trim());
+            }
+        });
 
     }
 
