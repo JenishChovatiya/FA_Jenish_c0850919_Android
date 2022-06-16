@@ -2,6 +2,7 @@ package com.example.fa_jenish_c0850919_android;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     }
 
 
+    //for Inserting the data inside the database
     void addPlaces(String title)
     {
         SQLiteDatabase sdatabase = this.getWritableDatabase();
@@ -62,5 +64,27 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
             Toast.makeText(context, "Added Data into database Successfully.", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+    //reading the data from database
+    Cursor readAllData()
+    {
+        String query = " SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+
+
+        Cursor cursor = null;
+        if (sqLiteDatabase != null)
+        {
+            cursor = sqLiteDatabase.rawQuery(query, null);
+        }
+
+        return  cursor;
+    }
+
+
+
 
 }
