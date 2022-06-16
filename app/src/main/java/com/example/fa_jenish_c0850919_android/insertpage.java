@@ -2,15 +2,21 @@ package com.example.fa_jenish_c0850919_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,17 +27,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 public class insertpage extends FragmentActivity implements OnMapReadyCallback {
 
     //declaring some variables
-     GoogleMap gMap;
+    GoogleMap gMap;
 
 
-    private static final int REQUEST_CODE = 1;
     private Marker userLocationMarker;
     private Marker destinationMarker;
 
+
+    Location currentLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int REQUEST_CODE = 1;
 
     //declaring location Manager
     // location with location manager and listener
@@ -43,18 +54,29 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertpage);
 
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
+        /*fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+        }*/
+
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap)
     {
-        /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        gMap = googleMap;
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener()
         {
             @Override
@@ -77,16 +99,53 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
             public void onProviderDisabled(String provider) {
 
             }
-        };*/
+        };
 
 
-        gMap = googleMap;
-
-        LatLng Maharastra = new LatLng(19.389137, 76.031094);
-        gMap.addMarker(new MarkerOptions().position(Maharastra).title("Your Location"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Maharastra, 10));
+        if (!hasLocationPermission())
+            requestLocationPermission();
+        else
+            startUpdateLocation();
 
     }
 
 
+    private void setHomeMarker(Location location)
+    {
+        LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions options = new MarkerOptions().position(userLocation)
+                .title("You're Current Location")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        userLocationMarker = gMap.addMarker(options);
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
+    }
+
+
+    private void requestLocationPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+    }
+
+    private boolean hasLocationPermission() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void startUpdateLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (REQUEST_CODE == requestCode) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
+            }
+        }
+    }
 }
