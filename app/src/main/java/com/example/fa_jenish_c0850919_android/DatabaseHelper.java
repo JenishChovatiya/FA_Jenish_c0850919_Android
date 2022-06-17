@@ -63,6 +63,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         {
             Toast.makeText(context, "Added Data into database Successfully.", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
 
@@ -93,13 +95,30 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TITLE, title);
 
-        long result = sqLiteDatabase.update(TABLE_NAME, cv, " id=? ", new String[]{row_id});
+        long result = sqLiteDatabase.update(TABLE_NAME, cv, "id=?", new String[]{row_id});
         if(result == -1){
             Toast.makeText(context, "No Data Available.", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+
+    //for deleting the data
+    void deleteData(String row_id)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        long result = sqLiteDatabase.delete(TABLE_NAME,"id=?", new String[]{row_id});
+
+        if(result == -1)
+        {
+            Toast.makeText(context, "Error to Delete", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

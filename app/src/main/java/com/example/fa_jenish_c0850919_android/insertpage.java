@@ -83,6 +83,8 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
             {
                 DatabaseHelper myDatabaseHelper = new DatabaseHelper(insertpage.this);
                 myDatabaseHelper.addPlaces(placeNameET.getText().toString().trim());
+
+                finish();
             }
         });
 

@@ -7,14 +7,11 @@
     tools:context=".updateActivity">
 
 
-
-
     <EditText
         android:id="@+id/placeETUdatePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="Entre Place Name"
         android:inputType="textPersonName"
@@ -22,21 +19,31 @@
         android:paddingEnd="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
         android:id="@+id/updateBtnUpdatePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/cornerradius"
         android:text="Update "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeETUdatePage" />
 
+    <Button
+        android:id="@+id/deleteBtnUpdatePagte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/cornerradius"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeETUdatePage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
