@@ -1,5 +1,6 @@
 package com.example.fa_jenish_c0850919_android;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -26,16 +27,29 @@ public class updateActivity extends AppCompatActivity {
         updateBtn = findViewById(R.id.updateBtnUpdatePage);
 
 
+        getAndSetIntentData();
 
+        ActionBar ab = getSupportActionBar();
+        if(ab != null)
+        {
+
+            ab.setTitle(name1);
+
+        }
         //setting up on Click listener
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
+                DatabaseHelper myDBHelper = new DatabaseHelper(updateActivity.this);
+                myDBHelper.updateData(id1, name1);
 
             }
         });
-        getAndSetIntentData();
+
+
+
+
     }
 
 

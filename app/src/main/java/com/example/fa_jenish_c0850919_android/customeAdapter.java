@@ -1,6 +1,7 @@
 package com.example.fa_jenish_c0850919_android;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.session.PlaybackState;
@@ -19,11 +20,13 @@ public class customeAdapter extends RecyclerView.Adapter<customeAdapter.myViewHo
 
 
     private Context context;
+    Activity activity;
     private ArrayList place_id, place_name;
 
 
-    customeAdapter(homePage homePage, Context context, ArrayList place_id, ArrayList place_name)
+    customeAdapter(Activity activity, Context context, ArrayList place_id, ArrayList place_name)
     {
+        this.activity = activity;
         this.context = context;
         this.place_id = place_id;
         this.place_name = place_name;
@@ -52,7 +55,7 @@ public class customeAdapter extends RecyclerView.Adapter<customeAdapter.myViewHo
                 intent.putExtra("id", String.valueOf(place_id.get(position)));
                 intent.putExtra("name", String.valueOf(place_name.get(position)));
 
-                context.startActivity(intent);
+                activity.startActivityForResult(intent, 1);
             }
         });
     }

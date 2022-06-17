@@ -21,7 +21,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String COLUMN_TITLE = "place_title";
 
 
-    public DatabaseHelper(@Nullable Context context)
+    DatabaseHelper(@Nullable Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -86,5 +86,20 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
 
 
+    //for updating the data
+    void updateData(String row_id, String title)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE, title);
+
+        long result = sqLiteDatabase.update(TABLE_NAME, cv, " id=? ", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "No Data Available.", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 }
