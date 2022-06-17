@@ -79,11 +79,21 @@ public class homePage extends AppCompatActivity {
         }
         else
         {
+            if(cursor.moveToFirst())
+            {
+                do {
+                    place_id.add(cursor.getString(0));
+                    place_name.add(cursor.getString(1));
+                }while (cursor.moveToNext());
+            }
+
+
+            /*
             while (cursor.moveToNext())
             {
                 place_id.add(cursor.getString(0));
                 place_name.add(cursor.getString(1));
-            }
+            }*/
         }
     }
 

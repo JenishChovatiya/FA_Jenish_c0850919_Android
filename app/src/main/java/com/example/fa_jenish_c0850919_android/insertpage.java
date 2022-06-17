@@ -63,8 +63,7 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_insertpage);
 
 
-        placeNameET = findViewById(R.id.placeNameEditText);
-        addBtn = findViewById(R.id.addButnInsertPage);
+
 
 
 
@@ -73,6 +72,9 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        placeNameET = findViewById(R.id.placeNameEditText);
+        addBtn = findViewById(R.id.addButnInsertPage);
 
         //setting up on click listener
         addBtn.setOnClickListener(new View.OnClickListener() {

@@ -1,10 +1,13 @@
 package com.example.fa_jenish_c0850919_android;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.media.session.PlaybackState;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ public class customeAdapter extends RecyclerView.Adapter<customeAdapter.myViewHo
 
     private Context context;
     private ArrayList place_id, place_name;
+
 
     customeAdapter(homePage homePage, Context context, ArrayList place_id, ArrayList place_name)
     {
@@ -35,10 +39,22 @@ public class customeAdapter extends RecyclerView.Adapter<customeAdapter.myViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") final int position)
     {
-        holder.place_id.setText(String.valueOf(place_id.get(position)));
-        holder.place_name1.setText(String.valueOf(place_id.get(position)));
+
+        holder.place_id_TV.setText(String.valueOf(place_id.get(position)));
+        holder.place_name1_TV.setText(String.valueOf(place_name.get(position)));
+        holder.mainlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, updateActivity.class);
+
+                intent.putExtra("id", String.valueOf(place_id.get(position)));
+                intent.putExtra("name", String.valueOf(place_name.get(position)));
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -49,13 +65,17 @@ public class customeAdapter extends RecyclerView.Adapter<customeAdapter.myViewHo
     public class myViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView place_id, place_name1;
+        TextView place_id_TV, place_name1_TV;
+        LinearLayout mainlayout;
+
+
 
         public myViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            place_id = itemView.findViewById(R.id.IdTV);
-            place_name1 = itemView.findViewById(R.id.placeNameTV);
+            place_id_TV = itemView.findViewById(R.id.IdTV);
+            place_name1_TV = itemView.findViewById(R.id.placeNameTV);
+            mainlayout = itemView.findViewById(R.id.mainLayout);
         }
     }
 }
