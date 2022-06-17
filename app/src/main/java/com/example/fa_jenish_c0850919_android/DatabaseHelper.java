@@ -121,4 +121,12 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         }
     }
 
+
+    //for deleting all the row
+    void deleteAllData()
+    {
+        SQLiteDatabase myDatabase = this.getWritableDatabase();
+        myDatabase.execSQL(" DELETE FROM " + TABLE_NAME);
+    }
+
 }
