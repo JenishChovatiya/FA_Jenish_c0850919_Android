@@ -53,8 +53,6 @@ public class homePage extends AppCompatActivity {
         tv = findViewById(R.id.textViewhp);
 
 
-
-
         //setting up on click listner
         insertBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -83,6 +81,7 @@ public class homePage extends AppCompatActivity {
 
         recycleRV.setLayoutManager(new LinearLayoutManager(homePage.this));
         storeDataInArray();
+
 
 
     }
@@ -119,6 +118,9 @@ public class homePage extends AppCompatActivity {
             image.setVisibility(View.GONE);
             tv.setVisibility(View.GONE);
         }
+
+
+
 
     }
 

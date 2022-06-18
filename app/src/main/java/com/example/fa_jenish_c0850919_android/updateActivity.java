@@ -90,12 +90,20 @@ public class updateActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onClick(View v)
             {
-                DatabaseHelper myDBHelper = new DatabaseHelper(updateActivity.this);
+                if(placeNameUP.getText().toString().isEmpty())
+                {
+                    placeNameUP.setError("Please Provide the name.");
+                }
+                else
+                {
 
-                name1 = placeNameUP.getText().toString().trim();
+                    DatabaseHelper myDBHelper = new DatabaseHelper(updateActivity.this);
 
-                myDBHelper.updateData(id1, name1);
-                finish();
+                    name1 = placeNameUP.getText().toString().trim();
+
+                    myDBHelper.updateData(id1, name1);
+                    finish();
+                }
 
             }
         });

@@ -93,10 +93,19 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v)
             {
-                DatabaseHelper myDatabaseHelper = new DatabaseHelper(insertpage.this);
-                myDatabaseHelper.addPlaces(placeNameET.getText().toString().trim());
+               if(placeNameET.getText().toString().isEmpty())
+               {
+                    placeNameET.setError("Please Provide Name.");
+               }
+               else
+               {
 
-                finish();
+                   DatabaseHelper myDatabaseHelper = new DatabaseHelper(insertpage.this);
+                   myDatabaseHelper.addPlaces(placeNameET.getText().toString().trim());
+
+                   finish();
+               }
+
             }
         });
 
