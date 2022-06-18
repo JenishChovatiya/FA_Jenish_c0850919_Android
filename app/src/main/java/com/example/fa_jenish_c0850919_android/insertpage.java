@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -44,6 +45,9 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
 
     EditText placeNameET;
     Button addBtn;
+
+
+    CheckBox checing;
 
 
 
@@ -95,6 +99,8 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
                 finish();
             }
         });
+
+
 
     }
 

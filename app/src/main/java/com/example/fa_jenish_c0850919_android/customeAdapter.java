@@ -8,6 +8,7 @@ import android.media.session.PlaybackState;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class customeAdapter extends RecyclerView.Adapter<customeAdapter.myViewHo
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycleviewcard, parent, false);
         return new myViewHolder(view);
+
+
     }
 
     @Override

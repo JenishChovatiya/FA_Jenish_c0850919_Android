@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,7 +32,6 @@ public class homePage extends AppCompatActivity {
     Button insertBtn;
     ImageView image;
     TextView tv;
-
 
     //declaring database helper
     DatabaseHelper myDbhelper;
@@ -83,6 +83,7 @@ public class homePage extends AppCompatActivity {
 
         recycleRV.setLayoutManager(new LinearLayoutManager(homePage.this));
         storeDataInArray();
+
 
     }
 
