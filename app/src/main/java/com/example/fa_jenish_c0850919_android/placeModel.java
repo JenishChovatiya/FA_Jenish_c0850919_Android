@@ -5,18 +5,23 @@ public class placeModel
 
     //Creating variables for holding the data
     int placeid;
-    String placeName;
+    String placeName,placeLatitude,placeLongitude;
     int numberIncrementer;
 
 
     //Creating Constructor
-    public placeModel(int placeid, String placeName, int numberIncrementer)
+    public placeModel(int placeid, String placeName, int numberIncrementer, String placeLatitude, String placeLongitude)
     {
         this.placeid = placeid;
         this.placeName = placeName;
         this.numberIncrementer = numberIncrementer;
+        this.placeLatitude = placeLatitude;
+        this.placeLongitude = placeLongitude;
     }
 
+    public placeModel() {
+
+    }
 
 
     //creating getter and setter
@@ -46,6 +51,25 @@ public class placeModel
 
     public void setNumberIncrementer(int numberIncrementer) {
         this.numberIncrementer = numberIncrementer;
+    }
+
+
+    public String getPlaceLatitude() {
+        return placeLatitude;
+    }
+
+    public void setPlaceLatitude(String placeLatitude) {
+        this.placeLatitude = placeLatitude;
+    }
+
+    public String getPlaceLongitude() {
+        return placeLongitude;
+    }
+
+    public void setPlaceLongitude(String placeLongitude)
+    {
+        this.placeLongitude = placeLongitude;
+
     }
 
 

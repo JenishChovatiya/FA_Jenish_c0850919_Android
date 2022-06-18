@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper  extends SQLiteOpenHelper {
 
 
@@ -127,6 +130,32 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     {
         SQLiteDatabase myDatabase = this.getWritableDatabase();
         myDatabase.execSQL(" DELETE FROM " + TABLE_NAME);
+    }
+
+
+    //for storing latitude longitude
+    public List<placeModel> getAllPlaceDetail()
+    {
+        SQLiteDatabase mysqDatabase = this.getReadableDatabase();
+        List<placeModel> placeList = new ArrayList<>();
+        String getall = " SELECT * FROM " + TABLE_NAME;
+        Cursor c = mysqDatabase.rawQuery(getall, null);
+        if(c.moveToFirst())
+        {
+            do
+            {
+                placeModel placeModel = new placeModel();
+                placeModel.setPlaceid(c.getInt(0));
+                placeModel.setPlaceName(c.getString(1));
+                placeModel.setNumberIncrementer(c.getInt(2));
+                placeModel.setPlaceLatitude(c.getString(3));
+                placeModel.setPlaceLongitude(c.getString(4));
+
+                placeList.add(placeModel);
+
+            }while (c.moveToNext());
+        }
+        return  placeList;
     }
 
 }

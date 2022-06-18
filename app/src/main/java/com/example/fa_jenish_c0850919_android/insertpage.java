@@ -62,6 +62,9 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
 
     List<Marker> markerList;
 
+    LatLng storeTempLat;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,15 +136,21 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
             startUpdateLocation();
 
 
+        DatabaseHelper mydbHelper = new DatabaseHelper(insertpage.this);
+        List<placeModel> placeList = mydbHelper.getAllPlaceDetail() ;
+
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
-                MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Your Destination");
                 Marker marker = gMap.addMarker(markerOptions);
 
 
                 markerList = new ArrayList<>();
                 markerList.add(marker);
+
+
+               //storeTempLat = marker.getPosition();
 
 
 
