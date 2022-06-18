@@ -33,6 +33,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class insertpage extends FragmentActivity implements OnMapReadyCallback {
 
     //declaring some variables
@@ -56,6 +59,8 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
     // location with location manager and listener
     LocationManager locationManager;
     LocationListener locationListener;
+
+    List<Marker> markerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +131,23 @@ public class insertpage extends FragmentActivity implements OnMapReadyCallback {
             requestLocationPermission();
         else
             startUpdateLocation();
+
+
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+                Marker marker = gMap.addMarker(markerOptions);
+
+
+                markerList = new ArrayList<>();
+                markerList.add(marker);
+
+
+
+            }
+        });
+
 
     }
 

@@ -74,13 +74,15 @@ public class homePage extends AppCompatActivity {
         place_name = new ArrayList<>();
 
 
-        storeDataInArray();
+
 
 
         cusAdap = new customeAdapter(homePage.this, this, place_id, place_name);
         recycleRV.setAdapter(cusAdap);
 
+
         recycleRV.setLayoutManager(new LinearLayoutManager(homePage.this));
+        storeDataInArray();
 
     }
 
